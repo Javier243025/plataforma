@@ -1,3 +1,6 @@
+import { faPlus, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 export const HomePage = () => {
     const onLogout = () => {
 
@@ -11,23 +14,19 @@ export const HomePage = () => {
                 </span>
 
                 <button onClick={onLogout} className="w3-bar-item w3-right w3-green w3-button">
-                    Logout
+                    <FontAwesomeIcon icon={faSignOut} />
                 </button>
             </div>
 
-            <div className="w3-display-container" style={{height: '100vh'}}>
-                <div className="w3-display-bottomright w3-padding">
-                    <button className="w3-button w3-circle w3-xxlarge w3-green">
-                        +
-                    </button>
-                </div>
-            </div>
+            
 
             <div className="w3-main" style={{marginTop: '43px'}}>
-                
+                <div>
+                    Hola
+                </div>
 
-                <button onClick={onLogout} className="w3-bar-item w3-right w3-green w3-button">
-                    Nuevo
+                <button className="w3-button w3-circle w3-xlarge w3-green" style={{position: 'fixed', bottom: '20px', right: '20px'}}>
+                    <FontAwesomeIcon icon={faPlus} />
                 </button>
             </div>
         </div>
