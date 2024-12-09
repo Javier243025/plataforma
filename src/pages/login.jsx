@@ -20,7 +20,7 @@ export const LoginPage = () => {
         setError(null)
         try {
             if(usernameRef.current.value === 'admin' && passwordRef.current.value === '270793') {
-                login('admin')
+                login(usernameRef.current.value)
                 navigate('/home')
             } else {
                 setError('Hubo un error con el usuario o la contraseña, por favor verificalos e intenta de nuevo')
@@ -40,11 +40,11 @@ export const LoginPage = () => {
                 <label htmlFor="username">
                     <b>Username</b>
                 </label>
-                <input disabled={loading} ref={usernameRef} id="username" className="w3-input w3-border w3-margin-bottom" type="text" placeholder="Usuario" name="username" required/>
+                <input autoComplete="username" disabled={loading} ref={usernameRef} id="username" className="w3-input w3-border w3-margin-bottom" type="text" placeholder="Usuario" name="username" required/>
                 <label htmlFor="password">
                     <b>Contraseña</b>
                 </label>
-                <input disabled={loading} ref={passwordRef} id="password" className="w3-input w3-border w3-margin-bottom" type="password" placeholder="Contraseña" name="password" required/>
+                <input autoComplete="current-password" disabled={loading} ref={passwordRef} id="password" className="w3-input w3-border w3-margin-bottom" type="password" placeholder="Contraseña" name="password" required/>
                 <button disabled={loading} className="w3-button w3-block w3-green w3-section w3-padding" type="submit">
                     {loading && '...'}
                     {!loading && 'Entrar'}

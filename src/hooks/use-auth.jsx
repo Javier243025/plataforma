@@ -2,25 +2,26 @@ import { useEffect, useState } from "react"
 
 const USER_ID_KEY = 'userId'
 
-export const useAuth = () => {
-    const [ userState, setUserState ] = useState('PENDING')
+export const PENDING = 'PENDING'
+export const AUTHENTICATED = 'AUTHENTICATED'
+export const UNAUTHENTICATED = 'UNAUTHENTICATED'
 
-    const userIdSaved = localStorage.getItem(USER_ID_KEY)
+export const useAuth = () => {
+    const [ userState, setUserState ] = useState(PENDING)
+
+    const userId = localStorage.getItem(USER_ID_KEY)
     useEffect(() => {
-        if(!userIdSaved) {
-            setUserState('UNAUTHENTICATED')
-        } else {
-            setUserState('AUTHENTICATED')
-        }
-    }, [ userIdSaved ])
+        setUserState(userId ? AUTHENTICATED : UNAUTHENTICATED)
+    }, [ userId ])
 
     const login = (userId) => {
         localStorage.setItem(USER_ID_KEY, userId)
-        setUserState('AUTHENTICATED') 
+        setUserState(AUTHENTICATED)
     }
+
     const logout = () => {
         localStorage.removeItem(USER_ID_KEY)
-        setUserState('UNAUTHENTICATED') 
+        setUserState(UNAUTHENTICATED)
     }
 
     return { userState, login, logout }
