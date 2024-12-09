@@ -1,8 +1,10 @@
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Modal } from "../components/modal"
+import { useAuth } from "../hooks/use-auth"
 
 export const LoginPage = () => {
+    const { login } = useAuth()
     const navigate = useNavigate()
 
     const usernameRef = useRef()
@@ -18,6 +20,7 @@ export const LoginPage = () => {
         setError(null)
         try {
             if(usernameRef.current.value === 'admin' && passwordRef.current.value === '270793') {
+                login('admin')
                 navigate('/home')
             } else {
                 setError('Hubo un error con el usuario o la contraseña, por favor verificalos e intenta de nuevo')

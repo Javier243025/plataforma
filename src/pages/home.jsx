@@ -1,9 +1,15 @@
 import { faPlus, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAuth } from '../hooks/use-auth';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
-    const onLogout = () => {
+    const { logout } = useAuth()
+    const navigate = useNavigate()
 
+    const onLogout = () => {
+        logout()
+        navigate('/login')
     }
 
     return (
