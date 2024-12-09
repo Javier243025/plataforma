@@ -1,54 +1,63 @@
 import { useRef, useState } from "react"
-
-const delay = async (milliseconds) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve()
-        }, milliseconds)
-    })
-}
+import { useNavigate } from "react-router-dom"
+import { Modal } from "../components/modal"
 
 export const LoginPage = () => {
+    const navigate = useNavigate()
+
     const usernameRef = useRef()
     const passwordRef = useRef()
 
     const [ loading, setLoading ] = useState(false)
+    const [ error, setError ] = useState(null)
 
     const onSubmit = async (event) => {
         event.preventDefault()
 
         setLoading(true)
+        setError(null)
         try {
-            await delay(2000)
-            console.log(usernameRef.current.value)
-            console.log(passwordRef.current.value)
+            if(usernameRef.current.value === 'admin' && passwordRef.current.value === '270793') {
+                navigate('/home')
+            } else {
+                setError('Hubo un error con el usuario o la contraseña, por favor verificalos e intenta de nuevo')
+            }
         } finally {
             setLoading(false)
         }
     }
 
     return (
-        <div className="w3-modal" style={{display: "block"}}>
-            <div className="w3-modal-content w3-card-4 w3-animate-zoom">
-                <div className="w3-center">
-                    <br/>
-                    <img src="https://www.w3schools.com/w3css/img_avatar4.png" alt="Avatar" style={{width: '30%'}} className="w3-circle w3-margin-top"/>
-                </div>
-                <form onSubmit={onSubmit} className="w3-container">
-                    <label htmlFor="username">
-                        <b>Username</b>
-                    </label>
-                    <input disabled={loading} ref={usernameRef} id="username" className="w3-input w3-border w3-margin-bottom" type="text" placeholder="Usuario" name="username" required/>
-                    <label htmlFor="password">
-                        <b>Contraseña</b>
-                    </label>
-                    <input disabled={loading} ref={passwordRef} id="password" className="w3-input w3-border w3-margin-bottom" type="password" placeholder="Contraseña" name="password" required/>
-                    <button disabled={loading} className="w3-button w3-block w3-green w3-section w3-padding" type="submit">
-                        {loading && '...'}
-                        {!loading && 'Entrar'}
-                    </button>
-                </form>
+        <Modal>
+            <div className="w3-center">
+                <br/>
+                <img src="https://www.w3schools.com/w3css/img_avatar4.png" alt="Avatar" style={{width: '30%'}} className="w3-circle w3-margin-top"/>
             </div>
-        </div>
+            <form onSubmit={onSubmit} className="w3-container">
+                <label htmlFor="username">
+                    <b>Username</b>
+                </label>
+                <input disabled={loading} ref={usernameRef} id="username" className="w3-input w3-border w3-margin-bottom" type="text" placeholder="Usuario" name="username" required/>
+                <label htmlFor="password">
+                    <b>Contraseña</b>
+                </label>
+                <input disabled={loading} ref={passwordRef} id="password" className="w3-input w3-border w3-margin-bottom" type="password" placeholder="Contraseña" name="password" required/>
+                <button disabled={loading} className="w3-button w3-block w3-green w3-section w3-padding" type="submit">
+                    {loading && '...'}
+                    {!loading && 'Entrar'}
+                </button>
+            </form>
+            {error && <Modal color="w3-red" onClose={() => setError(null)} closable={true}>
+                <div className="w3-container">
+                    <h3 className="w3-center">
+                        Error iniciando sesión
+                    </h3>
+                    <div className="w3-center">
+                        {error}
+                    </div>
+                    <br/>
+                </div>
+            </Modal>}
+        </Modal>
     )
 }
