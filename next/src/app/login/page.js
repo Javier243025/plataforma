@@ -8,7 +8,7 @@ import { AUTHENTICATED, useAuth } from '../../hooks/use-auth';
 import { Loader } from '../../components/loader';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../services/firebase'
-import { LoginWithGoogle } from '@/components/login-with-google';
+import { LoginWithGoogle } from '../../components/login-with-google';
 
 export default function LoginPage () {
   const { userState, login } = useAuth();
