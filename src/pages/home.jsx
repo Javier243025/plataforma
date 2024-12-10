@@ -1,4 +1,4 @@
-import { faPlus, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../hooks/use-auth';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,8 @@ export const HomePage = () => {
     const [ showCreateModal, setShowCreateModal ] = useState(false)
     const [ loading, setLoading ] = useState(false)
     const [ error, setError ] = useState(null)
+
+    const [temperature, setTemperature] = useState(0)
 
     const { logout } = useAuth()
     const navigate = useNavigate()
@@ -63,15 +65,55 @@ export const HomePage = () => {
                             Agregar
                         </h3>
                         <form onSubmit={onAddSubmited}>
-                            <input className="w3-input w3-border w3-margin-bottom" type="date" placeholder="Fecha" name="date" required/>
-                            <input className="w3-input w3-border w3-margin-bottom" type="time" placeholder="Hora" name="hour" required/>
-                            <select className='w3-input w3-border w3-margin-bottom'>
+                            <label htmlFor='date'>
+                                <b>
+                                    Fecha
+                                </b>
+                            </label>
+                            <input id='date' className="w3-input w3-border w3-margin-bottom" type="date" placeholder="Fecha" name="date" required/>
+                            <label htmlFor='time'>
+                                <b>
+                                    Hora
+                                </b>
+                            </label>
+                            <input id='time' className="w3-input w3-border w3-margin-bottom" type="time" placeholder="Hora" name="hour" required/>
+                            <label htmlFor='band'>
+                                <b>
+                                    Banda
+                                </b>
+                            </label>
+                            <select id='band' className='w3-input w3-border w3-margin-bottom'>
                                 <option value="stacker">Stacker</option>
                                 <option value="picking">Picking</option>
                                 <option value="no-ferrosa">No Ferrosa</option>
                                 <option value="spec">Spec</option>
                             </select>
-                            <textarea className='w3-input w3-border w3-margin-bottom' placeholder='Detalles'/>
+                            <label htmlFor='temperature'>
+                                <b>
+                                    Temperatura
+                                </b>
+                            </label>
+                            <div id='temperature' className='w3-row w3-margin-bottom'>
+                                <button type='button' className='w3-button w3-col' style={{width: '10%'}} onClick={() => setTemperature(e => e - 1)}>
+                                    <FontAwesomeIcon icon={faMinus} />
+                                </button>
+                                <input className="w3-border w3-col" style={{
+                                    width: '80%',
+                                    padding: '8px',
+                                    display: 'block',
+                                    border: 'none',
+                                    borderBottom: '1px solid #ccc',
+                                }} type="number" placeholder="Temperatura" name="temperature" required disabled value={temperature}/>
+                                <button type='button' className='w3-button w3-col' style={{width: '10%'}} onClick={() => setTemperature(e => e + 1)}>
+                                    <FontAwesomeIcon icon={faPlus} />
+                                </button>
+                            </div>
+                            <label htmlFor='observations'>
+                                <b>
+                                    Observaciones
+                                </b>
+                            </label>
+                            <textarea id='observations' className='w3-input w3-border w3-margin-bottom' placeholder='Detalles'/>
                             <button disabled={loading} className="w3-button w3-block w3-green w3-section w3-padding" type="submit">
                                 {loading && '...'}
                                 {!loading && 'Guardar'}
