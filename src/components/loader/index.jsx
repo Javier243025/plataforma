@@ -1,7 +1,5 @@
-import './index.css'
+import './index.css';
 
 export const Loader = () => {
-    return (
-        <div className="loader"/>
-    )
-}
+  return <div className="loader" />;
+};
