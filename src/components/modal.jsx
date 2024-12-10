@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 export const Modal = ({ children, color = '', onClose, closable = false }) => {
     const onCloseClicked = () => {
         if(onClose) {
@@ -15,4 +17,11 @@ export const Modal = ({ children, color = '', onClose, closable = false }) => {
             </div>
         </div>
     )
+}
+
+Modal.propTypes = {
+    children: PropTypes.node.isRequired,
+    color: PropTypes.string,
+    onClose: PropTypes.func,
+    closable: PropTypes.bool
 }

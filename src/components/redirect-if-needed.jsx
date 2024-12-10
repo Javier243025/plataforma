@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { AUTHENTICATED, PENDING, UNAUTHENTICATED, useAuth } from "../hooks/use-auth"
 import { Loader } from './loader'
 import { useEffect } from "react"
+import PropTypes from "prop-types"
 
 export const RedirectIfNeeded = ({ children, requiresAuth = false }) => {
     const navigate = useNavigate()
@@ -42,4 +43,9 @@ export const RedirectIfNeeded = ({ children, requiresAuth = false }) => {
             {children}
         </div>
     )
+}
+
+RedirectIfNeeded.propTypes = {
+    children: PropTypes.node.isRequired,
+    requiresAuth: PropTypes.bool
 }
