@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+
+const isBrowser = typeof window !== 'undefined'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,8 +20,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = isBrowser ? initializeApp(firebaseConfig) : null;
 
-export const analytics = getAnalytics(app);
-export const auth = getAuth(app);
+export const analytics = isBrowser ? getAnalytics(app) : null;
+export const auth = isBrowser ? getAuth(app) : null;
 export default app;
