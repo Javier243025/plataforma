@@ -90,7 +90,7 @@ export const HomePage = () => {
                             </select>
                             <label htmlFor='temperature'>
                                 <b>
-                                    Temperatura
+                                    Temperatura del motor
                                 </b>
                             </label>
                             <div id='temperature' className='w3-row w3-margin-bottom'>
