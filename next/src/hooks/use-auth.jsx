@@ -1,4 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react';
+import { usePlatform } from './use-platform';
 
 const USER_ID_KEY = 'userId';
 
@@ -8,8 +11,9 @@ export const UNAUTHENTICATED = 'UNAUTHENTICATED';
 
 export const useAuth = () => {
   const [userState, setUserState] = useState(PENDING);
+  const { isBrowser } = usePlatform()
 
-  const userId = localStorage.getItem(USER_ID_KEY);
+  const userId = isBrowser ? localStorage.getItem(USER_ID_KEY) : null;
   useEffect(() => {
     setUserState(userId ? AUTHENTICATED : UNAUTHENTICATED);
   }, [userId]);
