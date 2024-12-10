@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { Modal } from '../../components/modal';
 import { AUTHENTICATED, useAuth } from '../../hooks/use-auth';
 import { Loader } from '../../components/loader';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../services/firebase'
+import { LoginWithGoogle } from '@/components/login-with-google';
 
 export default function LoginPage () {
   const { userState, login } = useAuth();
@@ -23,6 +26,26 @@ export default function LoginPage () {
       router.replace('/home');
     }
   }, [ userState ])
+
+  const loginWithGoogle = async (event) => {
+    event.preventDefault()
+
+    setLoading(true);
+    setError(null);
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      login('google');
+      router.replace('/home');
+    } catch(error) {
+      console.error(error)
+      setError(
+        'Hubo un error con el usuario o la contraseña, por favor verificalos e intenta de nuevo'
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -105,6 +128,15 @@ export default function LoginPage () {
           {loading && '...'}
           {!loading && 'Entrar'}
         </button>
+        <LoginWithGoogle
+          disabled={loading}
+          onClick={loginWithGoogle}
+          type="submit"
+        >
+          {loading && '...'}
+          {!loading && 'Login con Google'}
+        </LoginWithGoogle>
+        <br/>
       </form>
       {error && (
         <Modal color="w3-red" onClose={() => setError(null)} closable={true}>
