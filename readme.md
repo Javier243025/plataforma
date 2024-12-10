@@ -37,4 +37,4 @@ Esta aplicación de checklist digital está desarrollada con React y está dise�
     - Registre manualmente.
     - Los datos serán almacenados para análisis futuro.
 
-![image](https://github.com/Javier243025/plataforma/blob/master/images/image.png)
+![image](https://github.com/Javier243025/plataforma/blob/main/images/image.png)
