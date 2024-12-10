@@ -61,7 +61,7 @@ export default function LoginPage () {
       <div className="w3-center">
         <br />
         <Image
-          src="https://www.w3schools.com/w3css/img_avatar4.png"
+          src="/logo.jpeg"
           alt="Avatar"
           width={100}
           height={100}
